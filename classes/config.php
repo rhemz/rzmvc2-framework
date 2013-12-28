@@ -123,9 +123,10 @@ class Config
 	* 		file.key - returns a specific value existing in the file (e.g. database.hostname)
 	*		file.* - returns the full configuration array defined in the given file (e.g. routes.*)
 	* @param string $key Configuration query path
+	* @param mixed $default Default value to return if key does not exist
 	* @return mixed The configuration query result
 	*/
-	public function get($key)
+	public function get($key, $default = null)
 	{
 		$parts = explode(self::Config_Delimiter, $key);
 		if(sizeof($parts) != 2)
@@ -157,7 +158,7 @@ class Config
 		{
 			return $this->config[$parts[0]][$parts[1]];
 		}
-		return null;
+		return $default;
 
 	}
 
